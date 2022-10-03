@@ -26,10 +26,10 @@ app.get('/search', (req, res) => {
     if (!req.query.keywords) {
         return res.redirect("/")
     }
-    const keywords = req.query.keywords
+    const keywords = req.query.keywords.trim()
     const restaurants = restaurantList.filter(restaurant => {
-        return restaurant.name.toLowerCase().includes(keywords.trim().toLowerCase()) ||
-        restaurant.category.includes(keywords.trim())
+        return restaurant.name.toLowerCase().includes(keywords.toLowerCase()) ||
+        restaurant.category.includes(keywords)
     })
     res.render('index', { restaurants: restaurants, keywords: keywords })
 })
