@@ -80,7 +80,7 @@ app.get('/restaurants/:id/edit', (req, res) => {
 // update restaurant info
 app.post('/restaurants/:id', (req, res) => {
     const id = req.params.id
-    return Restaurant.findByIdAndUpdate(id, req.body)
+    return Restaurant.findByIdAndUpdate(id, req.body) 
         .then(() => res.redirect(`/restaurants/${id}`))
         .catch(error => console.error(error))
 })
