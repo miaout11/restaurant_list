@@ -31,6 +31,27 @@ app.get('/', (req, res) => {
         .catch(error => console.error(error))
 })
 
+// search function
+app.get('/search', (req, res) => {
+    if (!req.query.keywords) {
+        return res.redirect("/")
+    }
+    const keywords = req.query.keywords
+    const keyword = req.query.keywords.trim().toLowerCase()
+
+    Restaurant.find({})
+        .lean()
+        .then(restaurants => {
+            const filterRestaurants = restaurants.filter(
+                list => 
+                list.name.toLowerCase().includes(keyword) ||
+                list.category.includes(keyword)
+            )
+            res.render('index', { restaurants: filterRestaurants, keywords })
+        })
+        .catch(error => console.error(error))
+    })
+
 // create new restaurant
 app.get('/restaurants/new', (req, res) => {
     return res.render('new')
@@ -42,25 +63,12 @@ app.get('/restaurants/new', (req, res) => {
       .catch(error => console.error(error))
   })
 
-// show detail page
+// show page
 app.get('/restaurants/:id', (req, res) => {
     return Restaurant.findById(req.params.id)
         .lean()
         .then(restaurant => res.render('show', { restaurant }))
         .catch(error => console.error(error))
-})
-
-// search function
-app.get('/search', (req, res) => {
-    if (!req.query.keywords) {
-        return res.redirect("/")
-    }
-    const keywords = req.query.keywords.trim()
-    const restaurants = restaurantList.filter(restaurant => {
-        return restaurant.name.toLowerCase().includes(keywords.toLowerCase()) ||
-        restaurant.category.includes(keywords)
-    })
-    res.render('index', { restaurants: restaurants, keywords: keywords })
 })
 
 // start and listen on the Express server
