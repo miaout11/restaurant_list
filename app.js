@@ -78,20 +78,9 @@ app.get('/restaurants/:id/edit', (req, res) => {
         .catch(error => console.error(error))
 })
 // update restaurant info
-app.post('/restaurants/:id/edit', (req, res) => {
+app.post('/restaurants/:id', (req, res) => {
     const id = req.params.id
-    return Restaurant.findById(id)
-        .then(restaurant => {
-            restaurant.name = req.body.name
-            restaurant.category = req.body.category
-            restaurant.image = req.body.image
-            restaurant.location = req.body.location
-            restaurant.phone = req.body.phone
-            restaurant.google_map = req.body.google_map
-            restaurant.rating = req.body.rating
-            restaurant.description = req.body.description
-            return restaurant.save()
-        })
+    return Restaurant.findByIdAndUpdate(id, req.body)
         .then(() => res.redirect(`/restaurants/${id}`))
         .catch(error => console.error(error))
 })
