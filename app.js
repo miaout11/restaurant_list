@@ -5,7 +5,7 @@ const port = 3000
 const exphbs = require('express-handlebars')
 const Restaurant = require("./models/Restaurant")
 
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true }) // 連線到mongoDB
+mongoose.connect(process.env.MONGODB_PATH, { useNewUrlParser: true, useUnifiedTopology: true }) // 連線到mongoDB
 // 取得資料庫連線狀態
 const db = mongoose.connection
 db.on('error', () => {
@@ -43,9 +43,11 @@ app.get('/restaurants/new', (req, res) => {
   })
 
 // show detail page
-app.get('/restaurants/:restaurant_id', (req, res) => {
-    const restaurant = restaurantList.find(restaurant => restaurant.id.toString() === req.params.restaurant_id)
-    res.render('show', { restaurant: restaurant })
+app.get('/restaurants/:id', (req, res) => {
+    return Restaurant.findById(req.params.id)
+        .lean()
+        .then(restaurant => res.render('show', { restaurant }))
+        .catch(error => console.error(error))
 })
 
 // search function
