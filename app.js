@@ -103,7 +103,6 @@ app.post('/restaurants/:id/delete', (req, res) => {
         .catch(error => console.error(error))
 })
 
-
 // start and listen on the Express server
 app.listen(port, () => {
     console.log(`Express is listening on localhost:${port}`)

@@ -1,19 +1,22 @@
 # 我的餐廳清單 My Restaurant's List - 簡介
 
-紀錄自己喜歡的餐廳清單，可以瀏覽餐廳、查看詳細資訊並連結到地圖。
+紀錄自己喜歡的餐廳清單，可以瀏覽餐廳、查看餐廳詳細資訊、連結餐廳地址到GOOGLE-MAP、新增餐廳、編輯餐廳資訊、刪除餐廳。
 
 首頁圖
-![Index page about Restaurant List](./public/image/restaurant_list.png)
+![Index page about Restaurant List](./public/image/restaurant_list_v2.png)
 
 餐廳詳細資訊圖
 ![Index page about Restaurant List](./public/image/restaurant_info.png)
 
 ## 功能列表
 
-- 首頁可查看清單內所有的餐廳，有簡單資訊如店名、餐廳類型及評分。
-- 點擊餐廳圖片後可進一步瀏覽餐廳的詳細資訊，如地址、電話等。
+- 首頁可查看清單內所有的餐廳，有簡單資訊如店名、餐廳類型及評分
+- 點擊餐廳圖片及Detail可瀏覽餐廳的詳細資訊，如地址、電話等
 - 連結餐廳的地址到 Google 地圖
 - 可以透過關鍵字或餐廳類型搜尋餐廳
+- 點擊新增餐廳可以新增一間餐廳
+- 點擊Edit可以編輯餐廳
+- 點擊Delete可以刪除餐廳
 
 ### 安裝與執行步驟
 
@@ -51,3 +54,5 @@
 - [Express-Handlebars 3.0.0](https://www.npmjs.com/package/express-handlebars)
 - [Bootstrap 4.3.1](https://getbootstrap.com/docs/4.3/getting-started/download/)
 - [Font-awesome 5.8.1](https://fontawesome.com/)
+- [MongoDB](https://www.mongodb.com/try/download/community2)
+- [Mongoose 5.9.7](https://www.npmjs.com/package/mongoose)
