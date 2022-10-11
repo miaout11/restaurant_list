@@ -1,0 +1,43 @@
+<div class="container" style="margin-top: 30px;">
+    <h1 class="mb-1 restaurant-show-title">編輯餐廳 - {{restaurant.name}}</h1>
+    <form action="/restaurants/{{restaurant._id}}/edit" method="POST">
+        <div class="form-group">
+            <label for="name">餐廳名稱</label>
+            <input type="text" class="form-control" name="name" id="name" placeholder="請輸入餐廳名稱 ..." value="{{restaurant.name}}">
+        </div>
+        <div class="form-group">
+            <label for="name_en">餐廳英文名稱</label>
+            <input type="text" class="form-control" name="name_en" id="name_en" placeholder="請輸入餐廳英文名稱 ..." value="{{restaurant.name_en}}">
+        </div>
+        <div class="form-group">
+            <label for="category">餐廳類型</label>
+            <input type="text" class="form-control" name="category" id="category" placeholder="請輸入餐廳類型 ..." value="{{restaurant.category}}">
+        </div>
+        <div class="form-group">
+            <label for="image">餐廳圖片</label>
+            <input type="text" class="form-control" name="image" id="image" placeholder="請輸入餐廳圖片網址 ..." value="{{restaurant.image}}">
+        </div>
+        <div class="form-group">
+            <label for="location">餐廳地址</label>
+            <input type="text" class="form-control" name="location" id="location" placeholder="請輸入餐廳地址 ..." value="{{restaurant.location}}">
+        </div>
+        <div class="form-group">
+            <label for="phone">餐廳電話</label>
+            <input type="text" class="form-control" name="phone" id="phone" placeholder="請輸入餐廳電話 ..." value="{{restaurant.phone}}">
+        </div>
+        <div class="form-group">
+            <label for="google_map">餐廳google地圖</label>
+            <input type="text" class="form-control" name="google_map" id="google_map" placeholder="請輸入餐廳google地圖網址 ..." 
+            value="{{restaurant.google_map}}">
+        </div>
+        <div class="form-group">
+            <label for="rating">餐廳評分</label>
+            <input type="number" class="form-control" name="rating" id="rating" placeholder="請輸入餐廳評分 ..." value="{{restaurant.rating}}">
+        </div>
+        <div class="form-group">
+            <label for="description">餐廳介紹</label>
+            <input type="type" class="form-control" name="description" id="description" placeholder="請輸入餐廳介紹 ..." value="{{restaurant.description}}">
+        </div>
+        <button id="submit-btn" type="submit" class="btn btn-primary">儲存修改</button>
+    </form>
+</div>
