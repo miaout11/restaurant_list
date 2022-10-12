@@ -5,5 +5,9 @@ const restaurantList = require('../../restaurant.json').results // 載入餐廳�
 db.once('open', () => {
     console.log('restaurantSeeder connected!')
     Restaurant.create(restaurantList)
-    console.log('done.')
+        .then(() => {
+            console.log('done.')
+            db.close()
+        })
+        .catch(error => console.error(error))
 })

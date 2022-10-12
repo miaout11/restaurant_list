@@ -1,13 +1,26 @@
 const express = require('express')
 const router = express.Router()
 const Restaurant = require("../../models/restaurant")
+const sortSelector = require('../../utility/sortSelector')
 
 // 定義首頁路由
 router.get('/', (req, res) => {
-    Restaurant.find()
+    let sort = req.query.sort
+    const home = true
+    Restaurant.find({})
         .lean()
-        .sort({ _id: 'asc' })
-        .then(restaurants => res.render('index', { restaurants }))
+        .sort(sortSelector(sort))
+        .then(restaurants => res.render('index', { restaurants, home }))
+        .catch(error => console.error(error))
+})
+
+router.get('/', (req, res) => {
+    let sort = req.query.sort
+    console.log(sort)
+    Restaurant.find({})
+        .lean()
+        .sort(sortSelector(sort))
+        .then(restaurants => res.render('index', { restaurants, home }))
         .catch(error => console.error(error))
 })
 
