@@ -26,14 +26,14 @@ router.get('/:id/edit', (req, res) => {
         .catch(error => console.error(error))
 })
 // update restaurant info
-router.post('/:id', (req, res) => {
+router.put('/:id', (req, res) => {
     const id = req.params.id
     return Restaurant.findByIdAndUpdate(id, req.body)
         .then(() => res.redirect(`/restaurants/${id}`))
         .catch(error => console.error(error))
 })
 // delete restaurant
-router.post('/:id/delete', (req, res) => {
+router.delete('/:id', (req, res) => {
     return Restaurant.findById(req.params.id)
         .then(restaurant => restaurant.remove())
         .then(() => res.redirect('/'))

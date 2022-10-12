@@ -1,6 +1,6 @@
 const express = require('express')
-// const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
+const methodOverride = require('method-override')
 
 const port = 3000
 const routes = require('./routes')
@@ -14,6 +14,8 @@ app.set('view engine', 'handlebars')
 app.use(express.static('public'))
 // setting body-parser
 app.use(express.urlencoded({ extended: true }))
+// use method-override
+app.use(methodOverride('_method'))
 // !!!重構路由器，將 request 導入路由器!!!
 app.use(routes)
 
