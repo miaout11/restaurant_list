@@ -1,9 +1,10 @@
 const express = require('express')
-const mongoose = require('mongoose') //載入mongoose
-const app = express()
-const port = 3000
+const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
-const Restaurant = require("./models/Restaurant")
+
+const port = 3000
+const Restaurant = require("./models/restaurant")
+const routes = require('./routes')
 
 mongoose.connect(process.env.MONGODB_PATH, { useNewUrlParser: true, useUnifiedTopology: true }) // 連線到mongoDB
 // 取得資料庫連線狀態
@@ -15,6 +16,7 @@ db.once('open', () => {
     console.log('mongodb connected!')
 })
 
+const app = express()
 // express template engine
 app.engine('handlebars', exphbs({ defaultLayout: 'main'}))
 app.set('view engine', 'handlebars')
@@ -22,75 +24,29 @@ app.set('view engine', 'handlebars')
 app.use(express.static('public'))
 // setting body-parser
 app.use(express.urlencoded({ extended: true }))
+// !!!重構路由器，將 request 導入路由器!!!
+app.use(routes)
 
-// routes setting --get all data here
-app.get('/', (req, res) => {
-    Restaurant.find() // 叫model去資料庫找資料
-        .lean()
-        .then(restaurants => res.render('index', { restaurants }))
-        .catch(error => console.error(error))
-})
+// // search function
+// app.get('/search', (req, res) => {
+//     if (!req.query.keywords) {
+//         return res.redirect("/")
+//     }
+//     const keywords = req.query.keywords
+//     const keyword = req.query.keywords.trim().toLowerCase()
 
-// search function
-app.get('/search', (req, res) => {
-    if (!req.query.keywords) {
-        return res.redirect("/")
-    }
-    const keywords = req.query.keywords
-    const keyword = req.query.keywords.trim().toLowerCase()
-
-    Restaurant.find({})
-        .lean()
-        .then(restaurants => {
-            const filterRestaurants = restaurants.filter(
-                list => 
-                list.name.toLowerCase().includes(keyword) ||
-                list.category.includes(keyword)
-            )
-            res.render('index', { restaurants: filterRestaurants, keywords })
-        })
-        .catch(error => console.error(error))
-    })
-
-// create new restaurant
-app.get('/restaurants/new', (req, res) => {
-    return res.render('new')
-  })
-  app.post('/restaurants', (req, res) => {
-    Restaurant.create(req.body)
-      .then(() => res.redirect('/'))
-      .catch(error => console.error(error))
-  })
-
-// show page
-app.get('/restaurants/:id', (req, res) => {
-    return Restaurant.findById(req.params.id)
-        .lean()
-        .then(restaurant => res.render('show', { restaurant }))
-        .catch(error => console.error(error))
-})
-
-// edit page
-app.get('/restaurants/:id/edit', (req, res) => {
-    return Restaurant.findById(req.params.id)
-        .lean()
-        .then(restaurant => res.render('edit', { restaurant }))
-        .catch(error => console.error(error))
-})
-// update restaurant info
-app.post('/restaurants/:id', (req, res) => {
-    const id = req.params.id
-    return Restaurant.findByIdAndUpdate(id, req.body) 
-        .then(() => res.redirect(`/restaurants/${id}`))
-        .catch(error => console.error(error))
-})
-// delete restaurant
-app.post('/restaurants/:id/delete', (req, res) => {
-    return Restaurant.findById(req.params.id)
-        .then(restaurant => restaurant.remove())
-        .then(() => res.redirect('/'))
-        .catch(error => console.error(error))
-})
+//     Restaurant.find({})
+//         .lean()
+//         .then(restaurants => {
+//             const filterRestaurants = restaurants.filter(
+//                 list => 
+//                 list.name.toLowerCase().includes(keyword) ||
+//                 list.category.includes(keyword)
+//             )
+//             res.render('index', { restaurants: filterRestaurants, keywords })
+//         })
+//         .catch(error => console.error(error))
+//     })
 
 // start and listen on the Express server
 app.listen(port, () => {
