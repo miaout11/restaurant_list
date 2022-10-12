@@ -1,13 +1,7 @@
-const mongoose = require('mongoose')
-const Restaurant = require('../restaurant') // 載入model
-const restaurantList = require('../../restaurant.json').results // 載入list資料
+const Restaurant = require('../restaurant')
+const db = require('../../config/mongoose') // 取得 db 執行 mongoose.js
+const restaurantList = require('../../restaurant.json').results // 載入餐廳資料
 
-mongoose.connect(process.env.MONGODB_PATH, { useNewUrlParser: true, useUnifiedTopology: true }) // 連線到mongoDB
-// 取得資料庫連線狀態
-const db = mongoose.connection
-db.on('error', () => {
-    console.log('mongode error')
-})
 db.once('open', () => {
     console.log('restaurantSeeder connected!')
     Restaurant.create(restaurantList)
