@@ -4,7 +4,7 @@ const Restaurant = require("../../models/restaurant")
 
 // 定義首頁路由
 router.get('/', (req, res) => {
-    Restaurant.find() 
+    Restaurant.find()
         .lean()
         .sort({ _id: 'asc' })
         .then(restaurants => res.render('index', { restaurants }))

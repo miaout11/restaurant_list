@@ -8,7 +8,7 @@ require('./config/mongoose')
 
 const app = express()
 // express template engine
-app.engine('handlebars', exphbs({ defaultLayout: 'main'}))
+app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 // 設定載入靜態檔案
 app.use(express.static('public'))
