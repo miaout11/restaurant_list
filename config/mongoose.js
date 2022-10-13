@@ -5,10 +5,10 @@ mongoose.connect(process.env.MONGODB_PATH, { useNewUrlParser: true, useUnifiedTo
 const db = mongoose.connection
 
 db.on('error', () => {
-    console.log('mongode error')
+  console.log('mongode error')
 })
 db.once('open', () => {
-    console.log('mongodb connected!')
+  console.log('mongodb connected!')
 })
 
 module.exports = db // 匯出資料庫連線狀態 db

@@ -1,50 +1,37 @@
 const express = require('express')
 const router = express.Router()
-const Restaurant = require("../../models/restaurant")
+const Restaurant = require('../../models/restaurant')
 const sortSelector = require('../../utility/sortSelector')
 
 // 定義首頁路由
 router.get('/', (req, res) => {
-    let sort = req.query.sort
-    const home = true
-    Restaurant.find({})
-        .lean()
-        .sort(sortSelector(sort))
-        .then(restaurants => res.render('index', { restaurants, home }))
-        .catch(error => console.error(error))
-})
-
-router.get('/', (req, res) => {
-    let sort = req.query.sort
-    console.log(sort)
-    Restaurant.find({})
-        .lean()
-        .sort(sortSelector(sort))
-        .then(restaurants => res.render('index', { restaurants, home }))
-        .catch(error => console.error(error))
+  const sort = req.query.sort
+  const home = true
+  Restaurant.find({})
+    .lean()
+    .sort(sortSelector(sort))
+    .then(restaurants => res.render('index', { restaurants, home }))
+    .catch(error => console.error(error))
 })
 
 // search function
 router.get('/search', (req, res) => {
-    if (!req.query.keywords) {
-        return res.redirect("/")
-    }
-    const keywords = req.query.keywords
-    const keyword = req.query.keywords.trim().toLowerCase()
+  if (!req.query.keywords) {
+    return res.redirect('/')
+  }
+  const keywords = req.query.keywords
+  const keyword = req.query.keywords.trim().toLowerCase()
 
-    Restaurant.find({})
-        .lean()
-        .then(restaurants => {
-            const filterRestaurants = restaurants.filter(
-                list =>
-                    list.name.toLowerCase().includes(keyword) ||
-                    list.category.includes(keyword)
-            )
-            res.render('index', { restaurants: filterRestaurants, keywords })
-        })
-        .catch(error => console.error(error))
+  Restaurant.find({})
+    .lean()
+    .then(restaurants => {
+      const filterRestaurants = restaurants.filter(
+        list =>
+          list.name.toLowerCase().includes(keyword) || list.category.includes(keyword)
+      )
+      res.render('index', { restaurants: filterRestaurants, keywords })
+    })
+    .catch(error => console.error(error))
 })
 
 module.exports = router
-
-

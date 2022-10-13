@@ -3,11 +3,11 @@ const db = require('../../config/mongoose') // 取得 db 執行 mongoose.js
 const restaurantList = require('../../restaurant.json').results // 載入餐廳資料
 
 db.once('open', () => {
-    console.log('restaurantSeeder connected!')
-    Restaurant.create(restaurantList)
-        .then(() => {
-            console.log('done.')
-            db.close()
-        })
-        .catch(error => console.error(error))
+  console.log('restaurantSeeder connected!')
+  Restaurant.create(restaurantList)
+    .then(() => {
+      console.log('done.')
+      db.close()
+    })
+    .catch(error => console.error(error))
 })
