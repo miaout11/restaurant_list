@@ -16,11 +16,12 @@ router.get('/', (req, res) => {
 
 // search function
 router.get('/search', (req, res) => {
-  if (!req.query.keywords) {
+  const keywords = req.query.keywords
+  const keyword = keywords.trim().toLowerCase()
+
+  if (!keywords) {
     return res.redirect('/')
   }
-  const keywords = req.query.keywords
-  const keyword = req.query.keywords.trim().toLowerCase()
 
   Restaurant.find({})
     .lean()

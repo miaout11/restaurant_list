@@ -22,25 +22,28 @@
 
 1. 請先確認有安裝 node.js 與 npm
 2. 將專案 clone 到本地
-3. 在本地開啟之後，透過終端機進入資料夾，輸入：
+3. 環境變數設置: 
+   * Windows cmd： set "MONGODB_PATH=你的MongoDB連線字串"
+   * MacOS terminal and git bash :  export MONGODB_PATH="你的MongoDB連線字串"
+4. 在本地開啟之後，透過終端機進入資料夾，輸入：
 
    ```
    npm install  //安裝套件
    ```
 
-4. 安裝完畢後，繼續輸入：
+5. 安裝完畢後，繼續輸入：
 
    ```
    npm run start  //執行程式
    ```
 
-5. 若看見此行訊息則代表順利運行，打開瀏覽器進入到以下網址
+6. 若看見此行訊息則代表順利運行，打開瀏覽器進入到以下網址
 
    ```
    Listening on http://localhost:3000
    ```
 
-6. 結束使用
+7. 結束使用
 
    ```
    ctrl + c  //結束程式
