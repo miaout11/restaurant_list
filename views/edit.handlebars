@@ -1,6 +1,6 @@
 <div class="container">
   <h1 class="mb-1 restaurant-show-title">編輯餐廳 - {{restaurant.name}}</h1>
-  <form action="/restaurants/{{restaurant._id}}?_method=PUT" method="POST">
+  <form action="/restaurants/{{restaurant._id}}?_method=PUT" method="POST" id="edit-form">
     <div class="form-group">
       <label for="name" style="color: #999999;">餐廳名稱</label>
       <input type="text" class="form-control" name="name" id="name" placeholder="請輸入餐廳名稱 ..."
@@ -46,6 +46,30 @@
       <input type="type" class="form-control" name="description" id="description" placeholder="請輸入餐廳介紹 ..."
         value="{{restaurant.description}}">
     </div>
-    <button id="submit-btn" type="submit" class="btn btn-primary mt-3">儲存修改</button>
+    <button id="submit-btn" type="submit" class="btn btn-primary mt-3" onclick="return confirmEdit()">儲存修改</button>
   </form>
 </div>
+
+<script>
+  function confirmEdit () {
+    const name = document.querySelector('#name').value
+    const category = document.querySelector('#category').value
+    const location = document.querySelector('#location').value
+    const phone = document.querySelector('#phone').value
+    if (name.trim().length === 0) {
+      alert('餐廳名稱不能空白!')
+      return false
+    } else if (category.trim().length === 0) {
+      alert('餐廳類型不能空白!')
+      return false
+    } else if (location.trim().length === 0) {
+      alert('餐廳地址不能空白!')
+      return false
+    } else if (phone.trim().length === 0) {
+      alert('餐廳電話不能空白!')
+      return false
+    } else {
+      document.getElementById("edit-form").submit()
+    }
+  }
+</script>

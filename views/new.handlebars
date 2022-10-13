@@ -1,6 +1,6 @@
 <h1 class="mb-1 restaurant-show-title">新 增 餐 廳</h1>
 <div class="container mb-5">
-  <form action="/restaurants" method="POST">
+  <form action="/restaurants" method="POST" id="create-form">
     <div class="form-group">
       <label for="name" style="color: #999999;">餐廳名稱</label>
       <input type="text" class="form-control" name="name" id="name" placeholder="請輸入餐廳名稱 ..." required>
@@ -32,12 +32,36 @@
     <div class="form-group mt-3">
       <label for="rating" style="color: #999999;">餐廳評分</label>
       <input type="number" class="form-control" name="rating" id="rating" placeholder="請輸入餐廳評分 ..." step="0.1" min="0"
-        max="5" required>
+        max="5">
     </div>
     <div class="form-group mt-3">
       <label for="description" style="color: #999999;">餐廳介紹</label>
-      <input type="type" class="form-control" name="description" id="description" placeholder="請輸入餐廳介紹 ..." required>
+      <input type="type" class="form-control" name="description" id="description" placeholder="請輸入餐廳介紹 ...">
     </div>
-    <button id="submit-btn" type="submit" class="btn btn-primary mt-3">新增餐廳</button>
+    <button id="submit-btn" type="button" class="btn btn-primary mt-3" onclick="return confirmCreate()">新增餐廳</button>
   </form>
 </div>
+
+<script>
+  function confirmCreate () {
+    const name = document.querySelector('#name').value
+    const category = document.querySelector('#category').value
+    const location = document.querySelector('#location').value
+    const phone = document.querySelector('#phone').value
+    if (name.trim().length === 0) {
+      alert('餐廳名稱不能空白!')
+      return false
+    } else if (category.trim().length === 0) {
+      alert('餐廳類型不能空白!')
+      return false
+    } else if (location.trim().length === 0) {
+      alert('餐廳地址不能空白!')
+      return false
+    } else if (phone.trim().length === 0) {
+      alert('餐廳電話不能空白!')
+      return false
+    } else {
+      document.getElementById("create-form").submit()
+    }
+  }
+</script>
