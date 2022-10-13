@@ -99,3 +99,8 @@ header {
     height: auto;
   }
 }
+
+.btn-primary {
+  border-color: #4592af !important;
+  background-color: #4592af !important;
+}

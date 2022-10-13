@@ -8,6 +8,8 @@ function sortSelector (sort) {
       return { category: 'asc' }
     case 'location':
       return { location: 'asc' }
+    case 'rating':
+      return { rating: 'desc' }
   }
 }
 
