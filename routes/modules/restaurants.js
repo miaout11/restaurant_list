@@ -2,6 +2,11 @@ const express = require('express')
 const router = express.Router()
 const Restaurant = require('../../models/restaurant')
 
+// login page
+router.get('/login', (req, res) => {
+  return res.render('login')
+})
+
 // create new restaurant
 router.get('/new', (req, res) => {
   return res.render('new')

@@ -104,3 +104,9 @@ header {
   border-color: #4592af !important;
   background-color: #4592af !important;
 }
+
+#email,
+#password {
+  width: 300px;
+  margin-left: 500px
+}
