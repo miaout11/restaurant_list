@@ -5,9 +5,10 @@ const sortSelector = require('../../utility/sortSelector')
 
 // 定義首頁路由
 router.get('/', (req, res) => {
+  const userId = req.user._id
   const sort = req.query.sort
   const home = true
-  Restaurant.find({})
+  Restaurant.find({ userId })
     .lean()
     .sort(sortSelector(sort))
     .then(restaurants => res.render('index', { restaurants, home }))

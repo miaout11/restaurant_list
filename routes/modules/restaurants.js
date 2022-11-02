@@ -7,35 +7,54 @@ router.get('/new', (req, res) => {
   return res.render('new')
 })
 router.post('/', (req, res) => {
-  console.log(req.body.name.length)
-  Restaurant.create(req.body)
+  const userId = req.user._id
+  const { name, nameEn, category, image, location, phone, googleMap, rating, description } = req.body
+  return Restaurant.create({
+    name,
+    nameEn,
+    category,
+    image,
+    location,
+    phone,
+    googleMap,
+    rating,
+    description,
+    userId
+  })
     .then(() => res.redirect('/'))
     .catch(error => console.error(error))
 })
 // show page
 router.get('/:id', (req, res) => {
-  return Restaurant.findById(req.params.id)
+  const userId = req.user._id
+  const _id = req.params.id
+  return Restaurant.findOne({ _id, userId })
     .lean()
     .then(restaurant => res.render('show', { restaurant }))
     .catch(error => console.error(error))
 })
 // edit page
 router.get('/:id/edit', (req, res) => {
-  return Restaurant.findById(req.params.id)
+  const userId = req.user._id
+  const _id = req.params.id
+  return Restaurant.findOne({ _id, userId })
     .lean()
     .then(restaurant => res.render('edit', { restaurant }))
     .catch(error => console.error(error))
 })
 // update restaurant info
 router.put('/:id', (req, res) => {
-  const id = req.params.id
-  return Restaurant.findByIdAndUpdate(id, req.body)
-    .then(() => res.redirect(`/restaurants/${id}`))
+  const userId = req.user._id
+  const _id = req.params.id
+  return Restaurant.findOneAndUpdate({ _id, userId }, req.body, { returnNewDocument: true })
+    .then(() => res.redirect(`/restaurants/${_id}`))
     .catch(error => console.error(error))
 })
 // delete restaurant
 router.delete('/:id', (req, res) => {
-  return Restaurant.findById(req.params.id)
+  const userId = req.user._id
+  const _id = req.params.id
+  return Restaurant.findOne({ _id, userId })
     .then(restaurant => restaurant.remove())
     .then(() => res.redirect('/'))
     .catch(error => console.error(error))

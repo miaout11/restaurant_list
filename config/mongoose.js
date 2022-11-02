@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 // 設定連線到 mongoDB
-mongoose.connect(process.env.MONGODB_PATH, { useNewUrlParser: true, useUnifiedTopology: true }) // 連線到mongoDB
+mongoose.connect(process.env.MONGODB_PATH, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }) // 連線到mongoDB
 // 取得資料庫連線狀態
 const db = mongoose.connection
 
