@@ -34,6 +34,13 @@ app.use(methodOverride('_method'))
 // 呼叫 usePassport 函式並傳入參數 app，要寫在路由之前
 usePassport(app)
 
+// add auth middleware，需放在usePassport(app)之後，app.use(routes)之前
+app.use((req, res, next) => {
+  res.locals.isAuthenticated = req.isAuthenticated()
+  res.locals.user = req.user
+  next()
+})
+
 // 重構路由器，將 request 導入路由器
 app.use(routes)
 
