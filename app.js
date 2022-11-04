@@ -10,7 +10,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 const routes = require('./routes')
 
-// 匯入passport設定檔，要寫在 exress-session 後
+// 匯入passport設定檔
 const usePassport = require('./config/passport')
 require('./config/mongoose')
 
