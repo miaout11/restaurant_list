@@ -1,52 +1,53 @@
 <div class="container">
   <h1 class="mb-1 restaurant-show-title">編輯餐廳 - {{restaurant.name}}</h1>
   <form action="/restaurants/{{restaurant._id}}?_method=PUT" method="POST" id="edit-form">
-    <div class="form-group">
+    <div class="form-group col-10 d-block mx-auto">
       <label for="name" style="color: #999999;">餐廳名稱</label>
       <input type="text" class="form-control" name="name" id="name" placeholder="請輸入餐廳名稱 ..."
         value="{{restaurant.name}}" required>
     </div>
-    <div class="form-group mt-3">
+    <div class="form-group mt-3 col-10 d-block mx-auto">
       <label for="name_en" style="color: #999999;">餐廳英文名稱</label>
       <input type="text" class="form-control" name="name_en" id="name_en" placeholder="請輸入餐廳英文名稱 ..."
         value="{{restaurant.name_en}}">
     </div>
-    <div class="form-group mt-3">
+    <div class="form-group mt-3 col-10 d-block mx-auto">
       <label for="category" style="color: #999999;">餐廳類型</label>
       <input type="text" class="form-control" name="category" id="category" placeholder="請輸入餐廳類型 ..."
         value="{{restaurant.category}}" required>
     </div>
-    <div class="form-group mt-3">
+    <div class="form-group mt-3 col-10 d-block mx-auto">
       <label for="image" style="color: #999999;">餐廳圖片</label>
       <input type="text" class="form-control" name="image" id="image" placeholder="請輸入餐廳圖片網址 ..."
         value="{{restaurant.image}}">
     </div>
-    <div class="form-group mt-3">
+    <div class="form-group mt-3 col-10 d-block mx-auto">
       <label for="location" style="color: #999999;">餐廳地址</label>
       <input type="text" class="form-control" name="location" id="location" placeholder="請輸入餐廳地址 ..."
         value="{{restaurant.location}}" required>
     </div>
-    <div class="form-group mt-3">
+    <div class="form-group mt-3 col-10 d-block mx-auto">
       <label for="phone" style="color: #999999;">餐廳電話</label>
       <input type="text" class="form-control" name="phone" id="phone" placeholder="請輸入餐廳電話 ..."
         value="{{restaurant.phone}}" required>
     </div>
-    <div class="form-group mt-3">
+    <div class="form-group mt-3 col-10 d-block mx-auto">
       <label for="google_map" style="color: #999999;">餐廳google地圖</label>
       <input type="text" class="form-control" name="google_map" id="google_map" placeholder="請輸入餐廳google地圖網址 ..."
         value="{{restaurant.google_map}}">
     </div>
-    <div class="form-group mt-3">
+    <div class="form-group mt-3 col-10 d-block mx-auto">
       <label for="rating" style="color: #999999;">餐廳評分</label>
       <input type="number" class="form-control" name="rating" id="rating" placeholder="請輸入餐廳評分0-5分 ..."
         value="{{restaurant.rating}}" step="0.1" min="0" max="5">
     </div>
-    <div class="form-group mt-3">
+    <div class="form-group mt-3 col-10 d-block mx-auto">
       <label for="description" style="color: #999999;">餐廳介紹</label>
       <input type="type" class="form-control" name="description" id="description" placeholder="請輸入餐廳介紹 ..."
         value="{{restaurant.description}}">
     </div>
-    <button id="submit-btn" type="submit" class="btn btn-primary mt-3" onclick="return confirmEdit()">儲存修改</button>
+    <button id="submit-btn" type="submit" class="btn btn-primary mt-3 d-block mx-auto" onclick="return confirmEdit()"
+      style="font-size: 20px;">儲存修改</button>
   </form>
 </div>
 
